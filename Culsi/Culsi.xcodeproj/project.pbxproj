@@ -387,14 +387,14 @@
 			name = Release;
 		};
 
-                83B1A0152E8349AB00126B17 /* Debug */ = {
-                        isa = XCBuildConfiguration;
-                        buildSettings = {
+               83B1A0152E8349AB00126B17 /* Debug */ = {
+                       isa = XCBuildConfiguration;
+                       buildSettings = {
                                 BUNDLE_LOADER = "$(TEST_HOST)";
                                 CODE_SIGN_STYLE = Automatic;
                                 CURRENT_PROJECT_VERSION = 1;
                                 GENERATE_INFOPLIST_FILE = YES;
-                                IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+                                IPHONEOS_DEPLOYMENT_TARGET = 17.0;
                                 LD_RUNPATH_SEARCH_PATHS = (
                                         "$(inherited)",
                                         "@executable_path/Frameworks",
@@ -411,14 +411,14 @@
                         name = Debug;
                 };
 
-                83B1A0162E8349AB00126B17 /* Release */ = {
-                        isa = XCBuildConfiguration;
-                        buildSettings = {
+               83B1A0162E8349AB00126B17 /* Release */ = {
+                       isa = XCBuildConfiguration;
+                       buildSettings = {
                                 BUNDLE_LOADER = "$(TEST_HOST)";
                                 CODE_SIGN_STYLE = Automatic;
                                 CURRENT_PROJECT_VERSION = 1;
                                 GENERATE_INFOPLIST_FILE = YES;
-                                IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+                                IPHONEOS_DEPLOYMENT_TARGET = 17.0;
                                 LD_RUNPATH_SEARCH_PATHS = (
                                         "$(inherited)",
                                         "@executable_path/Frameworks",
