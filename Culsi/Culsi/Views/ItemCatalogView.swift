@@ -1,3 +1,4 @@
+import SwiftData
 import SwiftUI
 
 struct ItemCatalogView: View {
@@ -89,7 +90,7 @@ private struct CatalogItemFormView: View {
                 Section("Item") {
                     TextField("Name", text: $input.name)
                     TextField("Unit", text: $input.defaultUnit)
-                    TextField("Notes", text: Binding($input.notes, replacingNilWith: ""), axis: .vertical)
+                    TextField("Notes", text: $input.notes.orEmpty, axis: .vertical)
                         .lineLimit(2...4)
                 }
                 if mode.isEditing, let onDelete {
@@ -132,8 +133,6 @@ private extension CatalogItemFormView.Mode {
         return false
     }
 }
-
-extension CatalogItem: Identifiable {}
 
 struct ItemCatalogView_Previews: PreviewProvider {
     static var previews: some View {

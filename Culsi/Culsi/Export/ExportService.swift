@@ -1,3 +1,4 @@
+import CoreTransferable
 import Foundation
 import UniformTypeIdentifiers
 
@@ -19,6 +20,7 @@ struct ExportService {
         }
     }
 
+    @available(iOS 16.0, *)
     func payload(for logs: [FoodLog], format: ExportFormat, filename: String = "food-log") throws -> ExportPayload {
         let data = try data(for: logs, format: format)
         return ExportPayload(data: data, filename: filename, format: format)
@@ -49,13 +51,17 @@ struct ExportService {
     }
 }
 
+@available(iOS 16.0, *)
 struct ExportPayload: Transferable {
     let data: Data
     let filename: String
     let format: ExportFormat
 
     static var transferRepresentation: some TransferRepresentation {
-        DataRepresentation(exportedContentType: .plainText) { payload in
+        DataRepresentation(
+            exporting: ExportPayload.self,
+            contentType: \.format.utType
+        ) { payload in
             payload.data
         }
         .suggestedFileName { payload in

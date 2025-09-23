@@ -1,4 +1,5 @@
 import Foundation
+import UniformTypeIdentifiers
 
 enum ExportFormat: String, CaseIterable, Codable {
     case csv
@@ -11,10 +12,10 @@ enum ExportFormat: String, CaseIterable, Codable {
         }
     }
 
-    var contentType: String {
+    var utType: UTType {
         switch self {
-        case .csv: return "text/csv"
-        case .json: return "application/json"
+        case .csv: return .commaSeparatedText
+        case .json: return .json
         }
     }
 

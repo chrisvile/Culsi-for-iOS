@@ -1,22 +1,9 @@
 import UIKit
 
-final class LabelPrinter {
-    func renderer(for placements: [AveryPlacement], template: LabelTemplate) -> UIPrintPageRenderer {
-        LabelPageRenderer(placements: placements, template: template)
-    }
-
-    func print(placements: [AveryPlacement], template: LabelTemplate) {
-        #if os(iOS)
-        let controller = UIPrintInteractionController.shared
-        controller.printPageRenderer = renderer(for: placements, template: template)
-        controller.present(animated: true, completionHandler: nil)
-        #endif
-    }
-}
-
-private final class LabelPageRenderer: UIPrintPageRenderer {
+final class LabelPrinter: UIPrintPageRenderer {
     private let template: LabelTemplate
     private let placementMap: [String: AveryPlacement]
+    private static let letterPaperRect = CGRect(origin: .zero, size: CGSize(width: 8.5 * 72, height: 11 * 72))
 
     init(placements: [AveryPlacement], template: LabelTemplate) {
         self.template = template
@@ -25,19 +12,39 @@ private final class LabelPageRenderer: UIPrintPageRenderer {
     }
 
     override var paperRect: CGRect {
-        CGRect(origin: .zero, size: template.pageSize)
+        Self.letterPaperRect
     }
 
     override var printableRect: CGRect {
-        paperRect.insetBy(dx: 18, dy: 36)
+        paperRect.insetBy(dx: 36, dy: 36)
     }
 
     override func numberOfPages() -> Int {
         1
     }
 
-    override func drawContentForPage(at pageIndex: Int, in printableRect: CGRect) {
+    override func drawPage(at pageIndex: Int, in printableRect: CGRect) {
         guard pageIndex == 0 else { return }
+        if placementMap.isEmpty {
+            drawPlaceholder(in: printableRect)
+        } else {
+            drawLabels(in: printableRect)
+        }
+    }
+
+    private func drawPlaceholder(in rect: CGRect) {
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.alignment = .center
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.preferredFont(forTextStyle: .headline),
+            .foregroundColor: UIColor.secondaryLabel,
+            .paragraphStyle: paragraph
+        ]
+        let placeholder = "Label printing preview coming soon."
+        placeholder.draw(in: rect.insetBy(dx: 24, dy: 24), withAttributes: attributes)
+    }
+
+    private func drawLabels(in printableRect: CGRect) {
         let labelWidth = template.labelSize.width
         let labelHeight = template.labelSize.height
         let totalWidth = CGFloat(template.columns) * labelWidth + CGFloat(template.columns - 1) * template.horizontalSpacing
@@ -72,5 +79,19 @@ private final class LabelPageRenderer: UIPrintPageRenderer {
             let textRect = rect.insetBy(dx: 6, dy: 6)
             placement.text.draw(in: textRect, withAttributes: attributes)
         }
+    }
+}
+
+extension LabelPrinter {
+    static func renderer(for placements: [AveryPlacement], template: LabelTemplate) -> LabelPrinter {
+        LabelPrinter(placements: placements, template: template)
+    }
+
+    static func present(placements: [AveryPlacement], template: LabelTemplate) {
+        #if os(iOS)
+        let controller = UIPrintInteractionController.shared
+        controller.printPageRenderer = LabelPrinter(placements: placements, template: template)
+        controller.present(animated: true, completionHandler: nil)
+        #endif
     }
 }

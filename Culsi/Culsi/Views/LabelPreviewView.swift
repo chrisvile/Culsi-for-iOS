@@ -4,7 +4,6 @@ struct LabelPreviewView: View {
     @StateObject private var batchViewModel = LabelBatchViewModel()
     @StateObject private var foodLogViewModel = FoodLogViewModel()
     @State private var showingPreview = false
-    private let printer = LabelPrinter()
 
     var body: some View {
         NavigationStack {
@@ -36,7 +35,10 @@ struct LabelPreviewView: View {
                         showingPreview = true
                     }
                     Button("Print") {
-                        printer.print(placements: batchViewModel.sheetState.placements, template: LabelTemplates.avery5160)
+                        LabelPrinter.present(
+                            placements: batchViewModel.sheetState.placements,
+                            template: LabelTemplates.avery5160
+                        )
                     }
                     Button("Reset") {
                         batchViewModel.reset()
