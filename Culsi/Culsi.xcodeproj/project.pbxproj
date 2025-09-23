@@ -8,6 +8,8 @@
 
 /* Begin PBXFileReference section */
 		83A44D2C2E83468900126B17 /* Culsi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Culsi.app; sourceTree = BUILT_PRODUCTS_DIR; };
+
+                83B1A0172E8349AB00126B17 /* CulsiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CulsiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -16,7 +18,23 @@
 			path = Culsi;
 			sourceTree = "<group>";
 		};
+
+                83B1A0182E8349AB00126B17 /* CulsiTests */ = {
+                        isa = PBXFileSystemSynchronizedRootGroup;
+                        path = Culsi/Tests;
+                        sourceTree = "<group>";
+                };
 /* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXContainerItemProxy section */
+                83B1A0192E8349AB00126B17 /* PBXContainerItemProxy */ = {
+                        isa = PBXContainerItemProxy;
+                        containerPortal = 83A44D242E83468900126B17 /* Project object */;
+                        proxyType = 1;
+                        remoteGlobalIDString = 83A44D2B2E83468900126B17;
+                        remoteInfo = Culsi;
+                };
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		83A44D292E83468900126B17 /* Frameworks */ = {
@@ -26,6 +44,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+
+                83B1A0122E8349AB00126B17 /* Frameworks */ = {
+                        isa = PBXFrameworksBuildPhase;
+                        buildActionMask = 2147483647;
+                        files = (
+                        );
+                        runOnlyForDeploymentPostprocessing = 0;
+                };
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -41,6 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				83A44D2C2E83468900126B17 /* Culsi.app */,
+                                83B1A0172E8349AB00126B17 /* CulsiTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -70,7 +97,39 @@
 			productReference = 83A44D2C2E83468900126B17 /* Culsi.app */;
 			productType = "com.apple.product-type.application";
 		};
+
+                83B1A0102E8349AB00126B17 /* CulsiTests */ = {
+                        isa = PBXNativeTarget;
+                        buildConfigurationList = 83B1A0142E8349AB00126B17 /* Build configuration list for PBXNativeTarget "CulsiTests" */;
+                        buildPhases = (
+                                83B1A0112E8349AB00126B17 /* Sources */,
+                                83B1A0122E8349AB00126B17 /* Frameworks */,
+                                83B1A0132E8349AB00126B17 /* Resources */,
+                        );
+                        buildRules = (
+                        );
+                        dependencies = (
+                                83B1A01A2E8349AB00126B17 /* PBXTargetDependency */,
+                        );
+                        fileSystemSynchronizedGroups = (
+                                83B1A0182E8349AB00126B17 /* CulsiTests */,
+                        );
+                        name = CulsiTests;
+                        packageProductDependencies = (
+                        );
+                        productName = CulsiTests;
+                        productReference = 83B1A0172E8349AB00126B17 /* CulsiTests.xctest */;
+                        productType = "com.apple.product-type.bundle.unit-test";
+                };
 /* End PBXNativeTarget section */
+
+/* Begin PBXTargetDependency section */
+                83B1A01A2E8349AB00126B17 /* PBXTargetDependency */ = {
+                        isa = PBXTargetDependency;
+                        target = 83A44D2B2E83468900126B17 /* Culsi */;
+                        targetProxy = 83B1A0192E8349AB00126B17 /* PBXContainerItemProxy */;
+                };
+/* End PBXTargetDependency section */
 
 /* Begin PBXProject section */
 		83A44D242E83468900126B17 /* Project object */ = {
@@ -82,6 +141,10 @@
 				TargetAttributes = {
 					83A44D2B2E83468900126B17 = {
 						CreatedOnToolsVersion = 26.0.1;
+					};
+				83B1A0102E8349AB00126B17 = {
+						CreatedOnToolsVersion = 26.0.1;
+						TestTargetID = 83A44D2B2E83468900126B17;
 					};
 				};
 			};
@@ -100,6 +163,7 @@
 			projectRoot = "";
 			targets = (
 				83A44D2B2E83468900126B17 /* Culsi */,
+				83B1A0102E8349AB00126B17 /* CulsiTests */,
 			);
 		};
 /* End PBXProject section */
@@ -112,6 +176,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+
+                83B1A0132E8349AB00126B17 /* Resources */ = {
+                        isa = PBXResourcesBuildPhase;
+                        buildActionMask = 2147483647;
+                        files = (
+                        );
+                        runOnlyForDeploymentPostprocessing = 0;
+                };
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -122,6 +194,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+
+                83B1A0112E8349AB00126B17 /* Sources */ = {
+                        isa = PBXSourcesBuildPhase;
+                        buildActionMask = 2147483647;
+                        files = (
+                        );
+                        runOnlyForDeploymentPostprocessing = 0;
+                };
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
@@ -306,6 +386,53 @@
 			};
 			name = Release;
 		};
+
+                83B1A0152E8349AB00126B17 /* Debug */ = {
+                        isa = XCBuildConfiguration;
+                        buildSettings = {
+                                BUNDLE_LOADER = "$(TEST_HOST)";
+                                CODE_SIGN_STYLE = Automatic;
+                                CURRENT_PROJECT_VERSION = 1;
+                                GENERATE_INFOPLIST_FILE = YES;
+                                IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+                                LD_RUNPATH_SEARCH_PATHS = (
+                                        "$(inherited)",
+                                        "@executable_path/Frameworks",
+                                        "@loader_path/Frameworks",
+                                );
+                                MARKETING_VERSION = 1.0;
+                                PRODUCT_BUNDLE_IDENTIFIER = www.feedourhouse.com.CulsiTests;
+                                PRODUCT_NAME = "$(TARGET_NAME)";
+                                SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+                                SWIFT_VERSION = 5.0;
+                                TARGETED_DEVICE_FAMILY = "1,2";
+                                TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Culsi.app/Culsi";
+                        };
+                        name = Debug;
+                };
+
+                83B1A0162E8349AB00126B17 /* Release */ = {
+                        isa = XCBuildConfiguration;
+                        buildSettings = {
+                                BUNDLE_LOADER = "$(TEST_HOST)";
+                                CODE_SIGN_STYLE = Automatic;
+                                CURRENT_PROJECT_VERSION = 1;
+                                GENERATE_INFOPLIST_FILE = YES;
+                                IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+                                LD_RUNPATH_SEARCH_PATHS = (
+                                        "$(inherited)",
+                                        "@executable_path/Frameworks",
+                                        "@loader_path/Frameworks",
+                                );
+                                MARKETING_VERSION = 1.0;
+                                PRODUCT_BUNDLE_IDENTIFIER = www.feedourhouse.com.CulsiTests;
+                                PRODUCT_NAME = "$(TARGET_NAME)";
+                                SWIFT_VERSION = 5.0;
+                                TARGETED_DEVICE_FAMILY = "1,2";
+                                TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Culsi.app/Culsi";
+                        };
+                        name = Release;
+                };
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -327,6 +454,16 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+
+                83B1A0142E8349AB00126B17 /* Build configuration list for PBXNativeTarget "CulsiTests" */ = {
+                        isa = XCConfigurationList;
+                        buildConfigurations = (
+                                83B1A0152E8349AB00126B17 /* Debug */,
+                                83B1A0162E8349AB00126B17 /* Release */,
+                        );
+                        defaultConfigurationIsVisible = 0;
+                        defaultConfigurationName = Release;
+                };
 /* End XCConfigurationList section */
 	};
 	rootObject = 83A44D242E83468900126B17 /* Project object */;
