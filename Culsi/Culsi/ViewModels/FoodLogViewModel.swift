@@ -85,7 +85,7 @@ final class FoodLogViewModel: ObservableObject {
                 FoodLogViewModel.filterLogs(logs, policy: filter, showExpired: showExpired)
             }
             .receive(on: RunLoop.main)
-            .assign(to: & $displayedLogs)
+            .assign(to: &$displayedLogs)
 
         Task { await repository.refresh() }
     }
