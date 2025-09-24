@@ -1,3 +1,4 @@
+import Combine
 import SwiftUI
 import SwiftData
 
@@ -156,23 +157,27 @@ struct FoodLogDetailView: View {
     struct TPHCCountdownView: View {
         let startedAt: Date
 
+        @State private var now = Date()
+        private let timer = Timer.publish(every: 30, on: .main, in: .common).autoconnect()
+
         var body: some View {
-            TimelineView(.periodic(from: .now, by: 30)) { context in
-                let discardAt = startedAt.addingTimeInterval(4 * 60 * 60)
-                let remaining = max(0, discardAt.timeIntervalSince(context.date))
+            let discardAt = startedAt.addingTimeInterval(4 * 60 * 60)
+            let remaining = max(0, discardAt.timeIntervalSince(now))
 
-                let message: String
-                if remaining > 0 {
-                    let value = FoodLogDetailView.countdownFormatter.string(from: remaining) ?? "--"
-                    message = "Discard in \(value)"
-                } else {
-                    message = "Expired"
-                }
-
-                Text(message)
-                    .font(.caption)
-                    .foregroundStyle(remaining > 0 ? Color.blue : .red)
+            let message: String
+            if remaining > 0 {
+                let value = FoodLogDetailView.countdownFormatter.string(from: remaining) ?? "--"
+                message = "Discard in \(value)"
+            } else {
+                message = "Expired"
             }
+
+            return Text(message)
+                .font(.caption)
+                .foregroundStyle(remaining > 0 ? Color.blue : .red)
+                .onReceive(timer) { value in
+                    now = value
+                }
         }
     }
 }
