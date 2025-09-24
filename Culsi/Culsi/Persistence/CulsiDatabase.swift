@@ -14,16 +14,29 @@ final class CulsiDatabase: Database {
     let container: ModelContainer
 
     init(inMemory: Bool = false) {
+        let schema = Schema([
+            FoodLog.self,
+            CatalogItem.self,
+            AverySheetState.self
+        ])
+        let configuration = ModelConfiguration(isStoredInMemoryOnly: inMemory)
+
         do {
-            let schema = Schema([
-                FoodLog.self,
-                CatalogItem.self,
-                AverySheetState.self
-            ])
-            let configuration = ModelConfiguration(isStoredInMemoryOnly: inMemory)
             container = try ModelContainer(for: schema, configurations: configuration)
         } catch {
-            fatalError("Unable to bootstrap database: \(error)")
+            assertionFailure("Unable to bootstrap persistent database: \(error)")
+
+            guard !inMemory else {
+                fatalError("Unable to bootstrap database: \(error)")
+            }
+
+            let fallbackConfiguration = ModelConfiguration(isStoredInMemoryOnly: true)
+
+            do {
+                container = try ModelContainer(for: schema, configurations: fallbackConfiguration)
+            } catch {
+                fatalError("Unable to bootstrap fallback database: \(error)")
+            }
         }
     }
 
