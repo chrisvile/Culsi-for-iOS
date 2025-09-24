@@ -59,6 +59,7 @@ final class FoodLog: Identifiable, Codable {
     var quantity: Double
     var unit: String
     @Attribute(originalName: "policy") private var policyStorage: String?
+    @Attribute(originalName: "tempUnit") private var tempUnitStorage: String?
     var policy: HoldPolicy {
         get {
             if let rawValue = policyStorage, let policy = HoldPolicy(rawValue: rawValue) {
@@ -72,7 +73,17 @@ final class FoodLog: Identifiable, Codable {
     }
     var startedAt: Date?
     var measuredTemp: Double?
-    var tempUnit: MeasureUnit
+    var tempUnit: MeasureUnit {
+        get {
+            if let rawValue = tempUnitStorage, let unit = MeasureUnit(rawValue: rawValue) {
+                return unit
+            }
+            let defaultUnit: MeasureUnit = .f
+            tempUnitStorage = defaultUnit.rawValue
+            return defaultUnit
+        }
+        set { tempUnitStorage = newValue.rawValue }
+    }
     var location: String?
     var employee: String?
     var notes: String?
@@ -116,7 +127,7 @@ final class FoodLog: Identifiable, Codable {
         self.policyStorage = policy.rawValue
         self.startedAt = startedAt ?? date
         self.measuredTemp = measuredTemp
-        self.tempUnit = tempUnit
+        self.tempUnitStorage = tempUnit.rawValue
         self.location = location
         self.employee = employee
         self.notes = notes
