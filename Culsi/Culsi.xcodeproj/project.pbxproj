@@ -8,86 +8,85 @@
 
 /* Begin PBXFileReference section */
 		83A44D2C2E83468900126B17 /* Culsi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Culsi.app; sourceTree = BUILT_PRODUCTS_DIR; };
-
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		83FE22262E837E0100FDCEBA /* Exceptions for "Assets.xcassets" folder in "Culsi" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				AccentColor.colorset/Contents.json,
+				AppIcon.appiconset/Contents.json,
+				Contents.json,
+			);
+			target = 83A44D2B2E83468900126B17 /* Culsi */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-                CD18FC9FB6494384932AF3BD /* App */ = {
-                        isa = PBXFileSystemSynchronizedRootGroup;
-                        path = App;
-                        sourceTree = "<group>";
-                };
-
-                A6FE8102C0FA7A26774E22AF /* Assets.xcassets */ = {
-                        isa = PBXFileSystemSynchronizedRootGroup;
-                        path = Assets.xcassets;
-                        sourceTree = "<group>";
-                };
-
-                3993A69E2CA7956518F22441 /* Culsi.xcdatamodeld */ = {
-                        isa = PBXFileSystemSynchronizedRootGroup;
-                        path = Culsi.xcdatamodeld;
-                        sourceTree = "<group>";
-                };
-
-                2C876D8EFB2A3FA670837B5A /* Export */ = {
-                        isa = PBXFileSystemSynchronizedRootGroup;
-                        path = Export;
-                        sourceTree = "<group>";
-                };
-
-                D1347120363C2B310653F610 /* Models */ = {
-                        isa = PBXFileSystemSynchronizedRootGroup;
-                        path = Models;
-                        sourceTree = "<group>";
-                };
-
-                D382729BD51E13C68BF56155 /* Persistence */ = {
-                        isa = PBXFileSystemSynchronizedRootGroup;
-                        path = Persistence;
-                        sourceTree = "<group>";
-                };
-
-                A83E50FD9BC840E2A1847FB9 /* Printing */ = {
-                        isa = PBXFileSystemSynchronizedRootGroup;
-                        path = Printing;
-                        sourceTree = "<group>";
-                };
-
-                B49CD206A577ECD1CD15E285 /* Repositories */ = {
-                        isa = PBXFileSystemSynchronizedRootGroup;
-                        path = Repositories;
-                        sourceTree = "<group>";
-                };
-
-                EF01FA9E1D6240CDA0600363 /* Resources */ = {
-                        isa = PBXFileSystemSynchronizedRootGroup;
-                        path = Resources;
-                        sourceTree = "<group>";
-                };
-
-                69853FC208E384B34801168A /* Utilities */ = {
-                        isa = PBXFileSystemSynchronizedRootGroup;
-                        path = Utilities;
-                        sourceTree = "<group>";
-                };
-
-                B1FEDB56C90448AAB2A11854 /* ViewModels */ = {
-                        isa = PBXFileSystemSynchronizedRootGroup;
-                        path = ViewModels;
-                        sourceTree = "<group>";
-                };
-
-                9BC493F719529CA9D33FFAA3 /* Views */ = {
-                        isa = PBXFileSystemSynchronizedRootGroup;
-                        path = Views;
-                        sourceTree = "<group>";
-                };
-
+		2C876D8EFB2A3FA670837B5A /* Export */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Export;
+			sourceTree = "<group>";
+		};
+		3993A69E2CA7956518F22441 /* Culsi.xcdatamodeld */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Culsi.xcdatamodeld;
+			sourceTree = "<group>";
+		};
+		69853FC208E384B34801168A /* Utilities */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		9BC493F719529CA9D33FFAA3 /* Views */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Views;
+			sourceTree = "<group>";
+		};
+		A6FE8102C0FA7A26774E22AF /* Assets.xcassets */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				83FE22262E837E0100FDCEBA /* Exceptions for "Assets.xcassets" folder in "Culsi" target */,
+			);
+			path = Assets.xcassets;
+			sourceTree = "<group>";
+		};
+		A83E50FD9BC840E2A1847FB9 /* Printing */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Printing;
+			sourceTree = "<group>";
+		};
+		B1FEDB56C90448AAB2A11854 /* ViewModels */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		B49CD206A577ECD1CD15E285 /* Repositories */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Repositories;
+			sourceTree = "<group>";
+		};
+		CD18FC9FB6494384932AF3BD /* App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = App;
+			sourceTree = "<group>";
+		};
+		D1347120363C2B310653F610 /* Models */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D382729BD51E13C68BF56155 /* Persistence */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Persistence;
+			sourceTree = "<group>";
+		};
+		EF01FA9E1D6240CDA0600363 /* Resources */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
-
-/* Begin PBXContainerItemProxy section */
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		83A44D292E83468900126B17 /* Frameworks */ = {
@@ -97,43 +96,42 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-                83A44D232E83468900126B17 = {
-                        isa = PBXGroup;
-                        children = (
-                                83A44D2E2E83468900126B17 /* Culsi */,
-                                83A44D2D2E83468900126B17 /* Products */,
-                        );
-                        sourceTree = "<group>";
-                };
-                83A44D2E2E83468900126B17 /* Culsi */ = {
-                        isa = PBXGroup;
-                        children = (
-                                CD18FC9FB6494384932AF3BD /* App */,
-                                A6FE8102C0FA7A26774E22AF /* Assets.xcassets */,
-                                3993A69E2CA7956518F22441 /* Culsi.xcdatamodeld */,
-                                2C876D8EFB2A3FA670837B5A /* Export */,
-                                D1347120363C2B310653F610 /* Models */,
-                                D382729BD51E13C68BF56155 /* Persistence */,
-                                A83E50FD9BC840E2A1847FB9 /* Printing */,
-                                B49CD206A577ECD1CD15E285 /* Repositories */,
-                                EF01FA9E1D6240CDA0600363 /* Resources */,
-                                69853FC208E384B34801168A /* Utilities */,
-                                B1FEDB56C90448AAB2A11854 /* ViewModels */,
-                                9BC493F719529CA9D33FFAA3 /* Views */,
-                        );
-                        path = Culsi;
-                        sourceTree = "<group>";
-                };
-                83A44D2D2E83468900126B17 /* Products */ = {
-                        isa = PBXGroup;
-                        children = (
-                                83A44D2C2E83468900126B17 /* Culsi.app */,
+		83A44D232E83468900126B17 = {
+			isa = PBXGroup;
+			children = (
+				83A44D2E2E83468900126B17 /* Culsi */,
+				83A44D2D2E83468900126B17 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		83A44D2D2E83468900126B17 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				83A44D2C2E83468900126B17 /* Culsi.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		83A44D2E2E83468900126B17 /* Culsi */ = {
+			isa = PBXGroup;
+			children = (
+				CD18FC9FB6494384932AF3BD /* App */,
+				A6FE8102C0FA7A26774E22AF /* Assets.xcassets */,
+				3993A69E2CA7956518F22441 /* Culsi.xcdatamodeld */,
+				2C876D8EFB2A3FA670837B5A /* Export */,
+				D1347120363C2B310653F610 /* Models */,
+				D382729BD51E13C68BF56155 /* Persistence */,
+				A83E50FD9BC840E2A1847FB9 /* Printing */,
+				B49CD206A577ECD1CD15E285 /* Repositories */,
+				EF01FA9E1D6240CDA0600363 /* Resources */,
+				69853FC208E384B34801168A /* Utilities */,
+				B1FEDB56C90448AAB2A11854 /* ViewModels */,
+				9BC493F719529CA9D33FFAA3 /* Views */,
+			);
+			path = Culsi;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,20 +149,20 @@
 			);
 			dependencies = (
 			);
-                        fileSystemSynchronizedGroups = (
-                                CD18FC9FB6494384932AF3BD /* App */,
-                                A6FE8102C0FA7A26774E22AF /* Assets.xcassets */,
-                                3993A69E2CA7956518F22441 /* Culsi.xcdatamodeld */,
-                                2C876D8EFB2A3FA670837B5A /* Export */,
-                                D1347120363C2B310653F610 /* Models */,
-                                D382729BD51E13C68BF56155 /* Persistence */,
-                                A83E50FD9BC840E2A1847FB9 /* Printing */,
-                                B49CD206A577ECD1CD15E285 /* Repositories */,
-                                EF01FA9E1D6240CDA0600363 /* Resources */,
-                                69853FC208E384B34801168A /* Utilities */,
-                                B1FEDB56C90448AAB2A11854 /* ViewModels */,
-                                9BC493F719529CA9D33FFAA3 /* Views */,
-                        );
+			fileSystemSynchronizedGroups = (
+				2C876D8EFB2A3FA670837B5A /* Export */,
+				3993A69E2CA7956518F22441 /* Culsi.xcdatamodeld */,
+				69853FC208E384B34801168A /* Utilities */,
+				9BC493F719529CA9D33FFAA3 /* Views */,
+				A6FE8102C0FA7A26774E22AF /* Assets.xcassets */,
+				A83E50FD9BC840E2A1847FB9 /* Printing */,
+				B1FEDB56C90448AAB2A11854 /* ViewModels */,
+				B49CD206A577ECD1CD15E285 /* Repositories */,
+				CD18FC9FB6494384932AF3BD /* App */,
+				D1347120363C2B310653F610 /* Models */,
+				D382729BD51E13C68BF56155 /* Persistence */,
+				EF01FA9E1D6240CDA0600363 /* Resources */,
+			);
 			name = Culsi;
 			packageProductDependencies = (
 			);
@@ -172,11 +170,7 @@
 			productReference = 83A44D2C2E83468900126B17 /* Culsi.app */;
 			productType = "com.apple.product-type.application";
 		};
-
 /* End PBXNativeTarget section */
-
-/* Begin PBXTargetDependency section */
-/* End PBXTargetDependency section */
 
 /* Begin PBXProject section */
 		83A44D242E83468900126B17 /* Project object */ = {
@@ -218,7 +212,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -229,7 +222,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
@@ -285,7 +277,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-                                IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -342,7 +334,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-                                IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -366,22 +358,22 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-                                LD_RUNPATH_SEARCH_PATHS = (
-                                        "$(inherited)",
-                                        "@executable_path/Frameworks",
-                                );
-                                MARKETING_VERSION = 1.0;
-                                PRODUCT_BUNDLE_IDENTIFIER = www.feedourhouse.com.Culsi;
-                                PRODUCT_NAME = "$(TARGET_NAME)";
-                                STRING_CATALOG_GENERATE_SYMBOLS = YES;
-                                SWIFT_APPROACHABLE_CONCURRENCY = YES;
-                                SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
-                                SWIFT_EMIT_LOC_STRINGS = YES;
-                                SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-                                SWIFT_VERSION = 5.0;
-                                TARGETED_DEVICE_FAMILY = "1,2";
-                                IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-                        };
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = www.feedourhouse.com.Culsi;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
 			name = Debug;
 		};
 		83A44D3E2E83468C00126B17 /* Release */ = {
@@ -398,26 +390,24 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-                                LD_RUNPATH_SEARCH_PATHS = (
-                                        "$(inherited)",
-                                        "@executable_path/Frameworks",
-                                );
-                                MARKETING_VERSION = 1.0;
-                                PRODUCT_BUNDLE_IDENTIFIER = www.feedourhouse.com.Culsi;
-                                PRODUCT_NAME = "$(TARGET_NAME)";
-                                STRING_CATALOG_GENERATE_SYMBOLS = YES;
-                                SWIFT_APPROACHABLE_CONCURRENCY = YES;
-                                SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
-                                SWIFT_EMIT_LOC_STRINGS = YES;
-                                SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-                                SWIFT_VERSION = 5.0;
-                                TARGETED_DEVICE_FAMILY = "1,2";
-                                IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-                        };
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = www.feedourhouse.com.Culsi;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
 			name = Release;
 		};
-
-
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -439,7 +429,6 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-
 /* End XCConfigurationList section */
 	};
 	rootObject = 83A44D242E83468900126B17 /* Project object */;
