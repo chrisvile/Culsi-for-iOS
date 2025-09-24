@@ -1,14 +1,13 @@
-import Combine
 import Foundation
+import Combine
 
 @MainActor
 final class LabelBatchViewModel: ObservableObject {
-    @Published private(set) var sheetState: AverySheetState
+    private let sheetRepository: AverySheetRepositoryType
+    @Published var sheetState: AverySheetState
+    private var cancellables = Set<AnyCancellable>()
     @Published private(set) var placements: [AveryPlacement] = []
     @Published var selectedLogs: Set<UUID> = []
-
-    private let sheetRepository: AverySheetRepositoryType
-    private var cancellables = Set<AnyCancellable>()
 
     init(sheetRepository: AverySheetRepositoryType = AverySheetRepository()) {
         self.sheetRepository = sheetRepository
@@ -21,9 +20,7 @@ final class LabelBatchViewModel: ObservableObject {
             }
             .store(in: &cancellables)
 
-        Task {
-            await sheetRepository.load()
-        }
+        Task { await sheetRepository.load() }
     }
 
     func generatePlacements(from logs: [FoodLog]) {
