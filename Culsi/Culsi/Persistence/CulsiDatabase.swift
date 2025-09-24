@@ -22,7 +22,9 @@ final class CulsiDatabase: Database {
         let configuration = ModelConfiguration(isStoredInMemoryOnly: inMemory)
 
         do {
-            container = try ModelContainer(for: schema, configurations: configuration)
+            let createdContainer = try ModelContainer(for: schema, configurations: configuration)
+            container = createdContainer
+            Self.backfillMissingStartedAt(in: createdContainer)
         } catch {
             assertionFailure("Unable to bootstrap persistent database: \(error)")
 
@@ -33,7 +35,9 @@ final class CulsiDatabase: Database {
             let fallbackConfiguration = ModelConfiguration(isStoredInMemoryOnly: true)
 
             do {
-                container = try ModelContainer(for: schema, configurations: fallbackConfiguration)
+                let fallbackContainer = try ModelContainer(for: schema, configurations: fallbackConfiguration)
+                container = fallbackContainer
+                Self.backfillMissingStartedAt(in: fallbackContainer)
             } catch {
                 fatalError("Unable to bootstrap fallback database: \(error)")
             }
@@ -103,6 +107,25 @@ final class CulsiDatabase: Database {
             try? context.save()
         }
         #endif
+    }
+
+    private static func backfillMissingStartedAt(in container: ModelContainer) {
+        var descriptor = FetchDescriptor<FoodLog>(predicate: #Predicate { $0.startedAt == nil })
+        descriptor.fetchLimit = nil
+        let context = ModelContext(container)
+        guard let logsNeedingUpdate = try? context.fetch(descriptor), !logsNeedingUpdate.isEmpty else {
+            return
+        }
+
+        logsNeedingUpdate.forEach { log in
+            log.resolvedStartedAt = log.date
+        }
+
+        do {
+            try context.save()
+        } catch {
+            assertionFailure("Failed to backfill startedAt values: \(error)")
+        }
     }
 }
 #else

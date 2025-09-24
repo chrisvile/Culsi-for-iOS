@@ -26,8 +26,9 @@ actor FoodLogStore {
             return results
         }
         return results.filter { log in
-            if let startDate = query.startDate, log.startedAt < startDate { return false }
-            if let endDate = query.endDate, log.startedAt > endDate { return false }
+            let start = log.resolvedStartedAt
+            if let startDate = query.startDate, start < startDate { return false }
+            if let endDate = query.endDate, start > endDate { return false }
             if let search = query.searchText?.trimmingCharacters(in: .whitespacesAndNewlines), !search.isEmpty {
                 let matchesName = log.name.localizedCaseInsensitiveContains(search)
                 let matchesLocation = (log.location ?? "").localizedCaseInsensitiveContains(search)

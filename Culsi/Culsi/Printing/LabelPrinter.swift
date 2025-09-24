@@ -100,7 +100,7 @@ extension LabelPrinter {
             let subtitle: String = {
                 switch log.policy {
                 case .tphc4h:
-                    return "Start: \(df.string(from: log.startedAt))  Discard: \(df.string(from: log.expiresAt))"
+                    return "Start: \(df.string(from: log.resolvedStartedAt))  Discard: \(df.string(from: log.expiresAt))"
                 case .hotHold, .coldHold:
                     if let t = log.measuredTemp {
                         let unit = log.tempUnit == .f ? "°F" : "°C"
