@@ -1,4 +1,5 @@
 import SwiftUI
+import SwiftData
 
 struct FoodLogDetailView: View {
     enum Mode {
