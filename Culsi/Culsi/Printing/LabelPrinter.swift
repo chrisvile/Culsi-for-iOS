@@ -91,3 +91,26 @@ extension LabelPrinter {
         return LabelPrinter(placements: mapped, columns: sheet.columns, rows: sheet.rows)
     }
 }
+
+extension LabelPrinter {
+    static func from(foodLogs: [FoodLog]) -> LabelPrinter {
+        let df = DateFormatter()
+        df.timeStyle = .short
+        let placements = foodLogs.map { log in
+            let subtitle: String = {
+                switch log.policy {
+                case .tphc4h:
+                    return "Start: \(df.string(from: log.startedAt))  Discard: \(df.string(from: log.expiresAt))"
+                case .hotHold, .coldHold:
+                    if let t = log.measuredTemp {
+                        let unit = log.tempUnit == .f ? "°F" : "°C"
+                        return "Temp: \(Int(t.rounded()))\(unit)"
+                    }
+                    return ""
+                }
+            }()
+            return SimplePlacement(title: log.name, subtitle: subtitle)
+        }
+        return LabelPrinter(placements: placements, columns: 3, rows: 10)
+    }
+}

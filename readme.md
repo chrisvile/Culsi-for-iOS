@@ -4,11 +4,14 @@ Culsi iOS is the iOS version of the **Culsi app**, a nutrition and labeling tool
 This project is a **SwiftUI + Combine** port of the existing Culsi Android codebase (originally written in Kotlin with Room & ViewModels).
 
 ## 🚀 Features
-- Track and manage **food logs**  
-- Maintain an **item catalog**  
-- Generate and preview **Avery sheet labels**  
-- Print labels via **LabelPrinter integration**  
-- Export logs in multiple **formats** (CSV, JSON, etc.)  
+- Track and manage **food logs**
+- Maintain an **item catalog**
+- Generate and preview **Avery sheet labels**
+- Print labels via **LabelPrinter integration**
+- Export logs in multiple **formats** (CSV, JSON, etc.)
+- TPHC (4-hour) timers with live countdown and expiration
+- Hot/Cold hold logging with temperature capture
+- Labels include discard time (TPHC) or latest temperature
 
 ## 📸 Screenshots
 > _Add screenshots here once the UI is ready_

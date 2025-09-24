@@ -51,16 +51,21 @@
 			path = Assets.xcassets;
 			sourceTree = "<group>";
 		};
-		A83E50FD9BC840E2A1847FB9 /* Printing */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Printing;
-			sourceTree = "<group>";
-		};
-		B1FEDB56C90448AAB2A11854 /* ViewModels */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = ViewModels;
-			sourceTree = "<group>";
-		};
+                A83E50FD9BC840E2A1847FB9 /* Printing */ = {
+                        isa = PBXFileSystemSynchronizedRootGroup;
+                        path = Printing;
+                        sourceTree = "<group>";
+                };
+                E2A5F1D9C0B842F6B9E0D123 /* Services */ = {
+                        isa = PBXFileSystemSynchronizedRootGroup;
+                        path = Services;
+                        sourceTree = "<group>";
+                };
+                B1FEDB56C90448AAB2A11854 /* ViewModels */ = {
+                        isa = PBXFileSystemSynchronizedRootGroup;
+                        path = ViewModels;
+                        sourceTree = "<group>";
+                };
 		B49CD206A577ECD1CD15E285 /* Repositories */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = Repositories;
@@ -122,14 +127,15 @@
 				A6FE8102C0FA7A26774E22AF /* Assets.xcassets */,
 				3993A69E2CA7956518F22441 /* Culsi.xcdatamodeld */,
 				2C876D8EFB2A3FA670837B5A /* Export */,
-				D1347120363C2B310653F610 /* Models */,
-				D382729BD51E13C68BF56155 /* Persistence */,
-				A83E50FD9BC840E2A1847FB9 /* Printing */,
-				B49CD206A577ECD1CD15E285 /* Repositories */,
-				EF01FA9E1D6240CDA0600363 /* Resources */,
-				69853FC208E384B34801168A /* Utilities */,
-				B1FEDB56C90448AAB2A11854 /* ViewModels */,
-				9BC493F719529CA9D33FFAA3 /* Views */,
+                                D1347120363C2B310653F610 /* Models */,
+                                D382729BD51E13C68BF56155 /* Persistence */,
+                                A83E50FD9BC840E2A1847FB9 /* Printing */,
+                                B49CD206A577ECD1CD15E285 /* Repositories */,
+                                E2A5F1D9C0B842F6B9E0D123 /* Services */,
+                                EF01FA9E1D6240CDA0600363 /* Resources */,
+                                69853FC208E384B34801168A /* Utilities */,
+                                B1FEDB56C90448AAB2A11854 /* ViewModels */,
+                                9BC493F719529CA9D33FFAA3 /* Views */,
 			);
 			path = Culsi;
 			sourceTree = "<group>";
@@ -157,11 +163,12 @@
 				A6FE8102C0FA7A26774E22AF /* Assets.xcassets */,
 				A83E50FD9BC840E2A1847FB9 /* Printing */,
 				B1FEDB56C90448AAB2A11854 /* ViewModels */,
-				B49CD206A577ECD1CD15E285 /* Repositories */,
-				CD18FC9FB6494384932AF3BD /* App */,
-				D1347120363C2B310653F610 /* Models */,
-				D382729BD51E13C68BF56155 /* Persistence */,
-				EF01FA9E1D6240CDA0600363 /* Resources */,
+                                B49CD206A577ECD1CD15E285 /* Repositories */,
+                                E2A5F1D9C0B842F6B9E0D123 /* Services */,
+                                CD18FC9FB6494384932AF3BD /* App */,
+                                D1347120363C2B310653F610 /* Models */,
+                                D382729BD51E13C68BF56155 /* Persistence */,
+                                EF01FA9E1D6240CDA0600363 /* Resources */,
 			);
 			name = Culsi;
 			packageProductDependencies = (
