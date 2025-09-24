@@ -15,10 +15,10 @@ struct FoodLogDetailView: View {
 
     private let temperatureUnits: [MeasureUnit] = MeasureUnit.allCases.filter { $0 != .ea }
     private static let countdownFormatter: DateComponentsFormatter = {
-        let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.hour, .minute]
-        formatter.unitsStyle = .abbreviated
-        return formatter
+        let f = DateComponentsFormatter()
+        f.unitsStyle = .abbreviated
+        f.allowedUnits = [.hour, .minute, .second]
+        return f
     }()
 
     init(mode: Mode, onSave: @escaping (FoodLogInput) -> Void, onDelete: (() -> Void)? = nil) {
@@ -104,7 +104,8 @@ struct FoodLogDetailView: View {
                 }
                 if mode.isEditing {
                     TimelineView(.periodic(from: .now, by: 30)) { context in
-                        let remaining = max(0, input.startedAt.addingTimeInterval(4 * 60 * 60).timeIntervalSince(context.date))
+                        let discardAt = input.startedAt.addingTimeInterval(4 * 60 * 60)
+                        let remaining = max(0, discardAt.timeIntervalSince(context.date))
                         let message: String
                         if remaining > 0 {
                             let value = Self.countdownFormatter.string(from: remaining) ?? "--"
