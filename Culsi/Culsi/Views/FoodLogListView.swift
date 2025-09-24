@@ -207,7 +207,7 @@ private struct FoodLogRow: View {
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
 
-                Text("Start: \(Self.startedFormatter.string(from: log.startedAt))")
+                Text("Start: \(Self.startedFormatter.string(from: log.resolvedStartedAt))")
                     .font(.caption)
                     .foregroundStyle(.secondary)
 

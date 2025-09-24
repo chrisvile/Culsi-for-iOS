@@ -33,7 +33,7 @@ struct ExportService {
                 escape(log.unit),
                 escape(log.notes ?? ""),
                 log.policy.rawValue,
-                Converters.isoFormatter.string(from: log.startedAt),
+                Converters.isoFormatter.string(from: log.resolvedStartedAt),
                 log.measuredTemp.map { String($0) } ?? "",
                 log.tempUnit.rawValue,
                 escape(log.location ?? ""),

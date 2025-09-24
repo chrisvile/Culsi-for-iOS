@@ -59,15 +59,20 @@ final class FoodLog: Identifiable, Codable {
     var quantity: Double
     var unit: String
     var policy: HoldPolicy
-    var startedAt: Date
+    var startedAt: Date?
     var measuredTemp: Double?
     var tempUnit: MeasureUnit
     var location: String?
     var employee: String?
     var notes: String?
 
+    var resolvedStartedAt: Date {
+        get { startedAt ?? date }
+        set { startedAt = newValue }
+    }
+
     var expiresAt: Date {
-        policy == .tphc4h ? startedAt.addingTimeInterval(4 * 60 * 60) : startedAt
+        policy == .tphc4h ? resolvedStartedAt.addingTimeInterval(4 * 60 * 60) : resolvedStartedAt
     }
 
     var isExpired: Bool {
@@ -85,7 +90,7 @@ final class FoodLog: Identifiable, Codable {
         quantity: Double,
         unit: String,
         policy: HoldPolicy,
-        startedAt: Date = .now,
+        startedAt: Date? = nil,
         measuredTemp: Double? = nil,
         tempUnit: MeasureUnit = .f,
         location: String? = nil,
@@ -98,7 +103,7 @@ final class FoodLog: Identifiable, Codable {
         self.quantity = quantity
         self.unit = unit
         self.policy = policy
-        self.startedAt = startedAt
+        self.startedAt = startedAt ?? date
         self.measuredTemp = measuredTemp
         self.tempUnit = tempUnit
         self.location = location
@@ -131,7 +136,7 @@ final class FoodLog: Identifiable, Codable {
         let quantity = try container.decode(Double.self, forKey: .quantity)
         let unit = try container.decode(String.self, forKey: .unit)
         let policy = try container.decodeIfPresent(HoldPolicy.self, forKey: .policy) ?? .hotHold
-        let startedAt = try container.decodeIfPresent(Date.self, forKey: .startedAt) ?? date
+        let startedAt = try container.decodeIfPresent(Date.self, forKey: .startedAt)
         let measuredTemp = try container.decodeIfPresent(Double.self, forKey: .measuredTemp)
         let tempUnit = try container.decodeIfPresent(MeasureUnit.self, forKey: .tempUnit) ?? .f
         let location = try container.decodeIfPresent(String.self, forKey: .location)
@@ -161,7 +166,7 @@ final class FoodLog: Identifiable, Codable {
         try container.encode(quantity, forKey: .quantity)
         try container.encode(unit, forKey: .unit)
         try container.encode(policy, forKey: .policy)
-        try container.encode(startedAt, forKey: .startedAt)
+        try container.encode(resolvedStartedAt, forKey: .startedAt)
         try container.encodeIfPresent(measuredTemp, forKey: .measuredTemp)
         try container.encode(tempUnit, forKey: .tempUnit)
         try container.encodeIfPresent(location, forKey: .location)
@@ -220,7 +225,7 @@ struct FoodLogInput: Identifiable, Equatable, Codable {
             quantity: log.quantity,
             unit: log.unit,
             policy: log.policy,
-            startedAt: log.startedAt,
+            startedAt: log.resolvedStartedAt,
             measuredTemp: log.measuredTemp,
             tempUnit: log.tempUnit,
             location: log.location,
