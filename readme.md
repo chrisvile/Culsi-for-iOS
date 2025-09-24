@@ -62,7 +62,7 @@ Each Android component has a Swift counterpart:
 Pull requests are welcome!  
 For major changes, please open an issue first to discuss what you’d like to change.  
 
-Please make sure to update tests as appropriate.  
+⚠️ Tests will be added in a later phase. Currently, no unit tests are included.  
 
 ## 📜 License
 This project is licensed under the **MIT License** – see the [LICENSE](LICENSE) file for details.
