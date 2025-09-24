@@ -13,12 +13,11 @@ struct LabelPreviewView: View {
             VStack(spacing: 16) {
                 labelGrid
                 Button("Generate from Selected Logs") {
-                    let selectedLogs = foodLogViewModel.logs.filter { batchViewModel.selectedLogs.contains($0.id) }
-                    batchViewModel.generatePlacements(from: selectedLogs)
+                    batchViewModel.generatePlacements(from: foodLogViewModel.logsSelection)
                 }
                 .buttonStyle(.borderedProminent)
 
-                List(selection: $batchViewModel.selectedLogs) {
+                List(selection: $foodLogViewModel.selectedLogIDs) {
                     ForEach(foodLogViewModel.logs) { log in
                         VStack(alignment: .leading) {
                             Text(log.name)
@@ -32,6 +31,12 @@ struct LabelPreviewView: View {
             }
             .padding()
             .navigationTitle("Labels")
+            .onAppear {
+                foodLogViewModel.onAppear()
+            }
+            .onDisappear {
+                foodLogViewModel.onDisappear()
+            }
             .toolbar {
                 ToolbarItemGroup(placement: .topBarTrailing) {
                     Button("Preview") {
@@ -39,10 +44,16 @@ struct LabelPreviewView: View {
                     }
                     Button("Print") {
                         #if canImport(UIKit)
-                        let renderer = LabelPrinter.from(
-                            placements: batchViewModel.placements,
-                            sheet: batchViewModel.sheetState
-                        )
+                        let renderer: LabelPrinter
+                        let selectedLogs = foodLogViewModel.logsSelection
+                        if !selectedLogs.isEmpty {
+                            renderer = LabelPrinter.from(foodLogs: selectedLogs)
+                        } else {
+                            renderer = LabelPrinter.from(
+                                placements: batchViewModel.placements,
+                                sheet: batchViewModel.sheetState
+                            )
+                        }
                         let controller = UIPrintInteractionController.shared
                         controller.printPageRenderer = renderer
                         controller.present(animated: true, completionHandler: nil)

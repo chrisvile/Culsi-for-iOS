@@ -23,7 +23,7 @@ struct ExportService {
     }
 
     func csv(from logs: [FoodLog]) -> String {
-        var rows = ["id,name,date,quantity,unit,notes"]
+        var rows = ["id,name,date,quantity,unit,notes,policy,startedAt,measuredTemp,tempUnit,location,employee,expiresAt,isExpired"]
         for log in logs {
             let values = [
                 log.id.uuidString,
@@ -31,7 +31,15 @@ struct ExportService {
                 Converters.isoFormatter.string(from: log.date),
                 String(log.quantity),
                 escape(log.unit),
-                escape(log.notes ?? "")
+                escape(log.notes ?? ""),
+                log.policy.rawValue,
+                Converters.isoFormatter.string(from: log.startedAt),
+                log.measuredTemp.map { String($0) } ?? "",
+                log.tempUnit.rawValue,
+                escape(log.location ?? ""),
+                escape(log.employee ?? ""),
+                log.policy == .tphc4h ? Converters.isoFormatter.string(from: log.expiresAt) : "",
+                log.policy == .tphc4h ? String(log.isExpired) : ""
             ]
             rows.append(values.joined(separator: ","))
         }

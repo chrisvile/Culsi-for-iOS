@@ -45,9 +45,43 @@ final class CulsiDatabase: Database {
 
             let now = dateProvider()
             let logs = [
-                FoodLog(name: "Milk", date: now, quantity: 2, unit: "L", notes: "Organic"),
-                FoodLog(name: "Eggs", date: now.addingTimeInterval(-86400), quantity: 12, unit: "ea", notes: "Farm"),
-                FoodLog(name: "Bread", date: now.addingTimeInterval(-172800), quantity: 1, unit: "loaf")
+                FoodLog(
+                    name: "Soup",
+                    date: now,
+                    quantity: 1,
+                    unit: "pan",
+                    policy: .hotHold,
+                    startedAt: now.addingTimeInterval(-1800),
+                    measuredTemp: 165,
+                    tempUnit: .f,
+                    location: "Line 1",
+                    employee: "AB",
+                    notes: "Stir hourly"
+                ),
+                FoodLog(
+                    name: "Salad",
+                    date: now.addingTimeInterval(-86400),
+                    quantity: 3,
+                    unit: "tray",
+                    policy: .coldHold,
+                    startedAt: now.addingTimeInterval(-7200),
+                    measuredTemp: 41,
+                    tempUnit: .f,
+                    location: "Salad Bar",
+                    employee: "CD",
+                    notes: "Keep covered"
+                ),
+                FoodLog(
+                    name: "Pizza",
+                    date: now.addingTimeInterval(-172800),
+                    quantity: 10,
+                    unit: "slice",
+                    policy: .tphc4h,
+                    startedAt: now.addingTimeInterval(-3000),
+                    measuredTemp: nil,
+                    tempUnit: .f,
+                    location: "Grab & Go"
+                )
             ]
             logs.forEach { context.insert($0) }
 
