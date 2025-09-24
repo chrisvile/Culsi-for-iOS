@@ -12,7 +12,8 @@ final class AverySheetStateStore {
     init() {}
     #endif
 
-    nonisolated(unsafe) static let shared: AverySheetStateStore = {
+    @MainActor
+    static let shared: AverySheetStateStore = {
         #if canImport(SwiftData)
         return AverySheetStateStore(container: try! CulsiDatabase.shared.container)
         #else
@@ -20,6 +21,7 @@ final class AverySheetStateStore {
         #endif
     }()
 
+    // CRUD
     #if canImport(SwiftData)
     func fetch() throws -> [AverySheetState] {
         try ModelContext(container).fetch(FetchDescriptor<AverySheetState>())
