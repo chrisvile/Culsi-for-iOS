@@ -9,18 +9,19 @@ final class LabelBatchViewModel: ObservableObject {
     @Published private(set) var placements: [AveryPlacement] = []
     @Published var selectedLogs: Set<UUID> = []
 
-    init(sheetRepository: AverySheetRepositoryType = AverySheetRepository()) {
-        self.sheetRepository = sheetRepository
+    init(sheetRepository: AverySheetRepositoryType? = nil) {
+        // Instantiate default on the main actor (safe), avoiding default-arg evaluation off-main.
+        self.sheetRepository = sheetRepository ?? AverySheetRepository()
         self.sheetState = AverySheetState()
 
-        sheetRepository.statePublisher
+        self.sheetRepository.statePublisher
             .receive(on: RunLoop.main)
             .sink { [weak self] state in
                 self?.sheetState = state
             }
             .store(in: &cancellables)
 
-        Task { await sheetRepository.load() }
+        Task { await self.sheetRepository.load() }
     }
 
     func generatePlacements(from logs: [FoodLog]) {
