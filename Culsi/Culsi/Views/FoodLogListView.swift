@@ -1,5 +1,6 @@
 import CoreTransferable
 import SwiftUI
+import SwiftData
 
 struct FoodLogListView: View {
     @StateObject private var viewModel = FoodLogViewModel()
