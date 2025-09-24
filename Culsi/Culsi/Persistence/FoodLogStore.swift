@@ -1,5 +1,4 @@
 import Foundation
-#if canImport(SwiftData)
 import SwiftData
 
 struct FoodLogQuery: Equatable {
@@ -97,12 +96,11 @@ actor FoodLogStore {
 
     private func fetchTPHCLogs() throws -> [FoodLog] {
         let descriptor = FetchDescriptor<FoodLog>(
-            predicate: #Predicate { $0.policy == .tphc4h },
+            predicate: #Predicate<FoodLog> { log in
+                log.policy == HoldPolicy.tphc4h
+            },
             sortBy: [SortDescriptor(\FoodLog.startedAt, order: .reverse)]
         )
         return try context.fetch(descriptor)
     }
 }
-#else
-// Core Data fallback can be implemented if SwiftData is unavailable.
-#endif
