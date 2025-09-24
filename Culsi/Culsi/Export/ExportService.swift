@@ -1,6 +1,6 @@
-import CoreTransferable
 import Foundation
 import UniformTypeIdentifiers
+import CoreTransferable
 
 enum ExportError: Error {
     case encoding
@@ -58,10 +58,9 @@ struct ExportPayload: Transferable {
     let format: ExportFormat
 
     static var transferRepresentation: some TransferRepresentation {
-        DataRepresentation(
-            exporting: ExportPayload.self,
-            contentType: \.format.utType
-        ) { payload in
+        // Use the designated initializer that takes a fixed UTType.
+        // We pass `.data` and rely on the filename extension for the correct type.
+        DataRepresentation(exportedContentType: .data) { payload in
             payload.data
         }
         .suggestedFileName { payload in
