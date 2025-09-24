@@ -32,13 +32,13 @@ enum HoldPolicy: String, Codable, CaseIterable, Identifiable {
     }
 }
 
-enum MeasureUnit: String, Codable, CaseIterable, Identifiable {
+enum MeasureUnit: String, Codable, CaseIterable, Hashable {
     case f
     case c
     case ea
+}
 
-    var id: String { rawValue }
-
+extension MeasureUnit {
     var title: String {
         switch self {
         case .f:

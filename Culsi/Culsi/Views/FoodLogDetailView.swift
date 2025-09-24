@@ -13,7 +13,6 @@ struct FoodLogDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @State private var input: FoodLogInput
 
-    private let temperatureUnits: [MeasureUnit] = MeasureUnit.allCases.filter { $0 != .ea }
     private static let countdownFormatter: DateComponentsFormatter = {
         let f = DateComponentsFormatter()
         f.unitsStyle = .abbreviated
@@ -92,6 +91,7 @@ struct FoodLogDetailView: View {
         }
     }
 
+    @ViewBuilder
     private var holdingSection: some View {
         Section("Holding") {
             DatePicker("Start", selection: $input.startedAt, displayedComponents: [.date, .hourAndMinute])
@@ -103,31 +103,36 @@ struct FoodLogDetailView: View {
                         .foregroundStyle(input.isExpired ? Color.red : .primary)
                 }
                 if mode.isEditing {
-                    TimelineView(.periodic(from: .now, by: 30)) { context in
-                        let discardAt = input.startedAt.addingTimeInterval(4 * 60 * 60)
-                        let remaining = max(0, discardAt.timeIntervalSince(context.date))
-                        let message: String
-                        if remaining > 0 {
-                            let value = Self.countdownFormatter.string(from: remaining) ?? "--"
-                            message = "Discard in \(value)"
-                        } else {
-                            message = "Expired"
-                        }
-                        Text(message)
-                            .font(.caption)
-                            .foregroundStyle(remaining > 0 ? Color.blue : .red)
-                    }
+                    tphcCountdownView(startedAt: input.startedAt)
                 }
             }
             temperatureField
             Picker("Unit", selection: $input.tempUnit) {
-                ForEach(temperatureUnits) { unit in
-                    Text(unit.title).tag(unit)
+                ForEach(MeasureUnit.allCases, id: \.self) { unit in
+                    Text(unit == .f ? "°F" : unit == .c ? "°C" : "ea").tag(unit)
                 }
             }
             .pickerStyle(.segmented)
             TextField("Location", text: $input.location.orEmpty)
             TextField("Employee", text: $input.employee.orEmpty)
+        }
+    }
+
+    @ViewBuilder
+    private func tphcCountdownView(startedAt: Date) -> some View {
+        TimelineView(.periodic(from: .now, by: 30)) { context in
+            let discardAt = startedAt.addingTimeInterval(4 * 60 * 60)
+            let remaining = max(0, discardAt.timeIntervalSince(context.date))
+            let message: String
+            if remaining > 0 {
+                let value = Self.countdownFormatter.string(from: remaining) ?? "--"
+                message = "Discard in \(value)"
+            } else {
+                message = "Expired"
+            }
+            Text(message)
+                .font(.caption)
+                .foregroundStyle(remaining > 0 ? Color.blue : .red)
         }
     }
 
