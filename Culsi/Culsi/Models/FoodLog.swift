@@ -58,7 +58,7 @@ final class FoodLog: Identifiable, Codable {
     var date: Date
     var quantity: Double
     var unit: String
-    @Attribute(originalName: "policy") private var policyStorage: String?
+    @Attribute(originalName: "policy") private(set) var policyStorage: String?
     @Attribute(originalName: "tempUnit") private var tempUnitStorage: String?
     var policy: HoldPolicy {
         get {
