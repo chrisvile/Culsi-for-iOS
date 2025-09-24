@@ -95,9 +95,10 @@ actor FoodLogStore {
     }
 
     private func fetchTPHCLogs() throws -> [FoodLog] {
+        let targetPolicy = HoldPolicy.tphc4h.rawValue
         let descriptor = FetchDescriptor<FoodLog>(
             predicate: #Predicate<FoodLog> { log in
-                log.policy == HoldPolicy.tphc4h
+                log.policy.rawValue == targetPolicy
             },
             sortBy: [SortDescriptor(\FoodLog.startedAt, order: .reverse)]
         )
