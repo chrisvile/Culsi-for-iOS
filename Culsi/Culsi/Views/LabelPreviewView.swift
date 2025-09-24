@@ -1,3 +1,6 @@
+#if canImport(UIKit)
+import UIKit
+#endif
 import SwiftUI
 
 struct LabelPreviewView: View {
@@ -19,7 +22,7 @@ struct LabelPreviewView: View {
                     ForEach(foodLogViewModel.logs) { log in
                         VStack(alignment: .leading) {
                             Text(log.name)
-                            Text(Converters.displayDateFormatter.string(from: log.date))
+                            Text(log.date.formatted(date: .abbreviated, time: .omitted))
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
@@ -35,10 +38,11 @@ struct LabelPreviewView: View {
                         showingPreview = true
                     }
                     Button("Print") {
-                        LabelPrinter.present(
-                            placements: batchViewModel.sheetState.placements,
-                            template: LabelTemplates.avery5160
-                        )
+                        #if canImport(UIKit)
+                        let controller = UIPrintInteractionController.shared
+                        controller.printPageRenderer = LabelPrinter()
+                        controller.present(animated: true, completionHandler: nil)
+                        #endif
                     }
                     Button("Reset") {
                         batchViewModel.reset()
@@ -46,21 +50,32 @@ struct LabelPreviewView: View {
                 }
             }
             .sheet(isPresented: $showingPreview) {
-                LabelPrintPreview(placements: batchViewModel.sheetState.placements)
+                LabelPrintPreview(placements: batchViewModel.placements)
             }
         }
     }
 
     private var labelGrid: some View {
-        let template = LabelTemplates.avery5160
+        let state = batchViewModel.sheetState
         return GeometryReader { geometry in
-            let width = geometry.size.width
-            let cellWidth = width / CGFloat(template.columns)
-            LazyVGrid(columns: Array(repeating: GridItem(.fixed(cellWidth), spacing: 8), count: template.columns), spacing: 8) {
-                ForEach(0..<template.capacity, id: \.self) { index in
-                    let row = index / template.columns
-                    let column = index % template.columns
-                    let placement = batchViewModel.sheetState.placements.first(where: { $0.row == row && $0.column == column })
+            let columns = max(state.columns, 1)
+            let rows = max(state.rows, 1)
+            let margin = CGFloat(state.marginInches * 72.0)
+            let availableWidth = max(geometry.size.width - margin * 2.0, 0)
+            let columnSpacing = CGFloat(8)
+            let totalSpacing = columnSpacing * CGFloat(columns - 1)
+            let preferredWidth = CGFloat(state.labelWidthInches * 72.0)
+            let computedWidth = (availableWidth - totalSpacing) / CGFloat(columns)
+            let cellWidth = preferredWidth > 0 ? min(max(computedWidth, 0), preferredWidth) : max(computedWidth, 0)
+            let cellHeight = CGFloat(state.labelHeightInches * 72.0)
+            LazyVGrid(
+                columns: Array(repeating: GridItem(.fixed(max(cellWidth, 0)), spacing: columnSpacing), count: columns),
+                spacing: columnSpacing
+            ) {
+                ForEach(0..<(columns * rows), id: \.self) { index in
+                    let row = index / columns
+                    let column = index % columns
+                    let placement = batchViewModel.placements.first(where: { $0.row == row && $0.column == column })
                     ZStack {
                         RoundedRectangle(cornerRadius: 8)
                             .strokeBorder(.secondary)
@@ -71,7 +86,7 @@ struct LabelPreviewView: View {
                                 .multilineTextAlignment(.center)
                         }
                     }
-                    .frame(height: 70)
+                    .frame(height: max(cellHeight, 44))
                 }
             }
         }

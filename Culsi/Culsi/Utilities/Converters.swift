@@ -1,20 +1,8 @@
 import Foundation
-
 enum Converters {
     static let isoFormatter: ISO8601DateFormatter = {
-        let formatter = ISO8601DateFormatter()
-        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        return formatter
+        let f = ISO8601DateFormatter()
+        f.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        return f
     }()
-
-    static let displayDateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .none
-        return formatter
-    }()
-
-    static func formattedQuantity(_ quantity: Double, unit: String) -> String {
-        "\(String(format: "%.2f", quantity)) \(unit)"
-    }
 }

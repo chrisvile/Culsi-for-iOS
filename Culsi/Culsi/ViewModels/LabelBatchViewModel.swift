@@ -4,6 +4,7 @@ import Foundation
 @MainActor
 final class LabelBatchViewModel: ObservableObject {
     @Published private(set) var sheetState: AverySheetState
+    @Published private(set) var placements: [AveryPlacement] = []
     @Published var selectedLogs: Set<UUID> = []
 
     private let sheetRepository: AverySheetRepositoryType
@@ -11,7 +12,7 @@ final class LabelBatchViewModel: ObservableObject {
 
     init(sheetRepository: AverySheetRepositoryType = AverySheetRepository()) {
         self.sheetRepository = sheetRepository
-        self.sheetState = AverySheetState(templateIdentifier: LabelTemplates.avery5160.id)
+        self.sheetState = AverySheetState()
 
         sheetRepository.statePublisher
             .receive(on: RunLoop.main)
@@ -26,21 +27,21 @@ final class LabelBatchViewModel: ObservableObject {
     }
 
     func generatePlacements(from logs: [FoodLog]) {
-        let template = LabelTemplates.avery5160
-        var placements: [AveryPlacement] = []
-        for (index, log) in logs.enumerated() where index < template.capacity {
-            let row = index / template.columns
-            let column = index % template.columns
-            let text = "\(log.name)\n\(Converters.displayDateFormatter.string(from: log.date))"
-            placements.append(AveryPlacement(row: row, column: column, text: text))
+        let columns = max(sheetState.columns, 1)
+        let rows = max(sheetState.rows, 1)
+        let capacity = columns * rows
+        var nextPlacements: [AveryPlacement] = []
+        for (index, log) in logs.enumerated() where index < capacity {
+            let row = index / columns
+            let column = index % columns
+            let text = "\(log.name)\n\(log.date.formatted(date: .abbreviated, time: .omitted))"
+            nextPlacements.append(AveryPlacement(row: row, column: column, text: text))
         }
-        sheetState.placements = placements
-        Task {
-            await sheetRepository.updatePlacements(placements)
-        }
+        placements = nextPlacements
     }
 
     func reset() {
+        placements.removeAll()
         Task { await sheetRepository.reset() }
     }
 }
