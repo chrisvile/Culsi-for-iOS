@@ -103,7 +103,7 @@ struct FoodLogDetailView: View {
                         .foregroundStyle(input.isExpired ? Color.red : .primary)
                 }
                 if mode.isEditing {
-                    tphcCountdownView(startedAt: input.startedAt)
+                    TPHCCountdownView(startedAt: input.startedAt)
                 }
             }
             temperatureField
@@ -115,26 +115,6 @@ struct FoodLogDetailView: View {
             .pickerStyle(.segmented)
             TextField("Location", text: $input.location.orEmpty)
             TextField("Employee", text: $input.employee.orEmpty)
-        }
-    }
-
-    @ViewBuilder
-    private func tphcCountdownView(startedAt: Date) -> some View {
-        TimelineView(.periodic(from: .now, by: 30)) { context in
-            let discardAt = startedAt.addingTimeInterval(4 * 60 * 60)
-            let remaining = max(0, discardAt.timeIntervalSince(context.date))
-
-            let message: String
-            if remaining > 0 {
-                let value = Self.countdownFormatter.string(from: remaining) ?? "--"
-                message = "Discard in \(value)"
-            } else {
-                message = "Expired"
-            }
-
-            Text(message)
-                .font(.caption)
-                .foregroundStyle(remaining > 0 ? Color.blue : .red)
         }
     }
 
@@ -171,6 +151,29 @@ struct FoodLogDetailView: View {
         formatter.timeStyle = .short
         formatter.dateStyle = .none
         return formatter.string(from: discardDate)
+    }
+
+    struct TPHCCountdownView: View {
+        let startedAt: Date
+
+        var body: some View {
+            TimelineView(.periodic(from: .now, by: 30)) { context in
+                let discardAt = startedAt.addingTimeInterval(4 * 60 * 60)
+                let remaining = max(0, discardAt.timeIntervalSince(context.date))
+
+                let message: String
+                if remaining > 0 {
+                    let value = FoodLogDetailView.countdownFormatter.string(from: remaining) ?? "--"
+                    message = "Discard in \(value)"
+                } else {
+                    message = "Expired"
+                }
+
+                Text(message)
+                    .font(.caption)
+                    .foregroundStyle(remaining > 0 ? Color.blue : .red)
+            }
+        }
     }
 }
 
