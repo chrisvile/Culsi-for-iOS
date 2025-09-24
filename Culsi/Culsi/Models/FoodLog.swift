@@ -58,7 +58,18 @@ final class FoodLog: Identifiable, Codable {
     var date: Date
     var quantity: Double
     var unit: String
-    var policy: HoldPolicy
+    @Attribute(originalName: "policy") private var policyStorage: String?
+    var policy: HoldPolicy {
+        get {
+            if let rawValue = policyStorage, let policy = HoldPolicy(rawValue: rawValue) {
+                return policy
+            }
+            let defaultPolicy: HoldPolicy = .hotHold
+            policyStorage = defaultPolicy.rawValue
+            return defaultPolicy
+        }
+        set { policyStorage = newValue.rawValue }
+    }
     var startedAt: Date?
     var measuredTemp: Double?
     var tempUnit: MeasureUnit
@@ -102,7 +113,7 @@ final class FoodLog: Identifiable, Codable {
         self.date = date
         self.quantity = quantity
         self.unit = unit
-        self.policy = policy
+        self.policyStorage = policy.rawValue
         self.startedAt = startedAt ?? date
         self.measuredTemp = measuredTemp
         self.tempUnit = tempUnit
