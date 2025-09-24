@@ -120,9 +120,10 @@ struct FoodLogDetailView: View {
 
     @ViewBuilder
     private func tphcCountdownView(startedAt: Date) -> some View {
-        TimelineView<PeriodicTimelineSchedule, Any>(.periodic(from: .now, by: 30)) { context in
+        TimelineView(.periodic(from: .now, by: 30)) { context in
             let discardAt = startedAt.addingTimeInterval(4 * 60 * 60)
             let remaining = max(0, discardAt.timeIntervalSince(context.date))
+
             let message: String
             if remaining > 0 {
                 let value = Self.countdownFormatter.string(from: remaining) ?? "--"
@@ -130,6 +131,7 @@ struct FoodLogDetailView: View {
             } else {
                 message = "Expired"
             }
+
             Text(message)
                 .font(.caption)
                 .foregroundStyle(remaining > 0 ? Color.blue : .red)
