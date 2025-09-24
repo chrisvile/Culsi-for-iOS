@@ -1,3 +1,4 @@
+import CoreTransferable
 import SwiftUI
 
 struct FoodLogListView: View {
@@ -56,15 +57,22 @@ struct FoodLogListView: View {
                 ToolbarItemGroup(placement: .topBarTrailing) {
                     Menu {
                         ForEach(exportFormats, id: \.self) { format in
-                            if let payload = try? exportService.payload(for: viewModel.logs, format: format) {
+                            // iOS 16+ only: ShareLink requires CoreTransferable
+                            if #available(iOS 16.0, *),
+                               let payload: ExportPayload = (try? exportService.payload(for: viewModel.logs, format: format)) {
                                 ShareLink(item: payload) {
-                                    let icon = format == .csv ? "tablecells" : "curlybraces"
+                                    let icon = (format == .csv) ? "tablecells" : "curlybraces"
                                     Label("Share \(format.rawValue.uppercased())", systemImage: icon)
                                 }
+                            } else {
+                                // Fallback: disabled button on older iOS (shouldn’t hit if target is iOS 17)
+                                let icon = (format == .csv) ? "tablecells" : "curlybraces"
+                                Label("Share \(format.rawValue.uppercased())", systemImage: icon)
+                                    .foregroundStyle(.secondary)
                             }
                         }
                     } label: {
-                        Image(systemName: "square.and.arrow.up")
+                        Label("Export", systemImage: "square.and.arrow.up")
                     }
                     Button {
                         presentingCreate = true
