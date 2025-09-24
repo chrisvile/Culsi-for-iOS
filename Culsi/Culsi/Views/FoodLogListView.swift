@@ -1,5 +1,5 @@
-import CoreTransferable
 import SwiftUI
+import CoreTransferable
 import SwiftData
 
 struct FoodLogListView: View {
@@ -58,15 +58,13 @@ struct FoodLogListView: View {
                 ToolbarItemGroup(placement: .topBarTrailing) {
                     Menu {
                         ForEach(exportFormats, id: \.self) { format in
-                            // iOS 16+ only: ShareLink requires CoreTransferable
                             if #available(iOS 16.0, *),
                                let payload: ExportPayload = (try? exportService.payload(for: viewModel.logs, format: format)) {
-                                ShareLink(item: payload) {
+                                ShareLink(item: payload, preview: SharePreview("\(payload.filename).\(payload.format.fileExtension)")) {
                                     let icon = (format == .csv) ? "tablecells" : "curlybraces"
                                     Label("Share \(format.rawValue.uppercased())", systemImage: icon)
                                 }
                             } else {
-                                // Fallback: disabled button on older iOS (shouldn’t hit if target is iOS 17)
                                 let icon = (format == .csv) ? "tablecells" : "curlybraces"
                                 Label("Share \(format.rawValue.uppercased())", systemImage: icon)
                                     .foregroundStyle(.secondary)
