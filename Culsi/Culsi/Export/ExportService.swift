@@ -51,11 +51,7 @@ struct ExportPayload: Transferable {
     let format: ExportFormat
 
     static var transferRepresentation: some TransferRepresentation {
-        DataRepresentation(exportedContentType: .data) { payload in
-            payload.data
-        }
-        .suggestedFileName { payload in
-            "\(payload.filename).\(payload.format.fileExtension)"
-        }
+        DataRepresentation(exportedContentType: .data) { $0.data }
+            .suggestedFileName { "\($0.filename).\($0.format.fileExtension)" }
     }
 }
