@@ -99,7 +99,7 @@ actor FoodLogStore {
         let targetPolicy = HoldPolicy.tphc4h.rawValue
         let descriptor = FetchDescriptor<FoodLog>(
             predicate: #Predicate<FoodLog> { log in
-                log.policy.rawValue == targetPolicy
+                log.policyStorage == targetPolicy
             },
             sortBy: [SortDescriptor(\FoodLog.startedAt, order: .reverse)]
         )
