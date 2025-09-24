@@ -5,6 +5,7 @@ struct FoodLogListView: View {
     @State private var presentingCreate = false
     @State private var editingLog: FoodLog?
     private let exportService = ExportService()
+    private let exportFormats: [ExportFormat] = [.csv, .json]
 
     var body: some View {
         NavigationStack {
@@ -17,7 +18,7 @@ struct FoodLogListView: View {
                             VStack(alignment: .leading, spacing: 4) {
                                 Text(log.name)
                                     .font(.headline)
-                                Text(Converters.displayDateFormatter.string(from: log.date))
+                                Text(log.date.formatted(date: .abbreviated, time: .omitted))
                                     .font(.caption)
                                     .foregroundStyle(.secondary)
                                 if let notes = log.notes, !notes.isEmpty {
@@ -54,10 +55,11 @@ struct FoodLogListView: View {
                 }
                 ToolbarItemGroup(placement: .topBarTrailing) {
                     Menu {
-                        ForEach(ExportFormat.allCases, id: \.self) { format in
+                        ForEach(exportFormats, id: \.self) { format in
                             if let payload = try? exportService.payload(for: viewModel.logs, format: format) {
                                 ShareLink(item: payload) {
-                                    Label("Share \(format.label)", systemImage: format.systemImageName)
+                                    let icon = format == .csv ? "tablecells" : "curlybraces"
+                                    Label("Share \(format.rawValue.uppercased())", systemImage: icon)
                                 }
                             }
                         }

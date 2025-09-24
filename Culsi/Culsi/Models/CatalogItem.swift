@@ -3,7 +3,7 @@ import Foundation
 import SwiftData
 
 @Model
-final class CatalogItem: Identifiable, Codable {
+final class CatalogItem: Codable {
     @Attribute(.unique) var id: UUID
     var name: String
     var defaultUnit: String

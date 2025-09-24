@@ -21,7 +21,7 @@
 
                 83B1A0182E8349AB00126B17 /* CulsiTests */ = {
                         isa = PBXFileSystemSynchronizedRootGroup;
-                        path = Culsi/Tests;
+                        path = Culsi/Culsi/Tests;
                         sourceTree = "<group>";
                 };
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -257,7 +257,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+                                IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -314,7 +314,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
+                                IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -338,21 +338,22 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = www.feedourhouse.com.Culsi;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
+                                LD_RUNPATH_SEARCH_PATHS = (
+                                        "$(inherited)",
+                                        "@executable_path/Frameworks",
+                                );
+                                MARKETING_VERSION = 1.0;
+                                PRODUCT_BUNDLE_IDENTIFIER = www.feedourhouse.com.Culsi;
+                                PRODUCT_NAME = "$(TARGET_NAME)";
+                                STRING_CATALOG_GENERATE_SYMBOLS = YES;
+                                SWIFT_APPROACHABLE_CONCURRENCY = YES;
+                                SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+                                SWIFT_EMIT_LOC_STRINGS = YES;
+                                SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+                                SWIFT_VERSION = 5.0;
+                                TARGETED_DEVICE_FAMILY = "1,2";
+                                IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+                        };
 			name = Debug;
 		};
 		83A44D3E2E83468C00126B17 /* Release */ = {
@@ -369,21 +370,22 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = www.feedourhouse.com.Culsi;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
+                                LD_RUNPATH_SEARCH_PATHS = (
+                                        "$(inherited)",
+                                        "@executable_path/Frameworks",
+                                );
+                                MARKETING_VERSION = 1.0;
+                                PRODUCT_BUNDLE_IDENTIFIER = www.feedourhouse.com.Culsi;
+                                PRODUCT_NAME = "$(TARGET_NAME)";
+                                STRING_CATALOG_GENERATE_SYMBOLS = YES;
+                                SWIFT_APPROACHABLE_CONCURRENCY = YES;
+                                SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+                                SWIFT_EMIT_LOC_STRINGS = YES;
+                                SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+                                SWIFT_VERSION = 5.0;
+                                TARGETED_DEVICE_FAMILY = "1,2";
+                                IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+                        };
 			name = Release;
 		};
 

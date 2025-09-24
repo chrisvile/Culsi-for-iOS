@@ -34,7 +34,7 @@ struct FoodLogDetailView: View {
                         Text("Quantity: \(input.quantity, specifier: "%.1f")")
                     }
                     TextField("Unit", text: $input.unit)
-                    TextField("Notes", text: Binding($input.notes, replacingNilWith: ""), axis: .vertical)
+                    TextField("Notes", text: $input.notes.orEmpty, axis: .vertical)
                         .lineLimit(2...4)
                 }
                 if mode.isEditing, let onDelete {
@@ -79,12 +79,6 @@ private extension FoodLogDetailView.Mode {
     var isEditing: Bool {
         if case .edit = self { return true }
         return false
-    }
-}
-
-private extension Binding where Value == String? {
-    init(_ source: Binding<String?>, replacingNilWith defaultValue: String) {
-        self.init(get: { source.wrappedValue ?? defaultValue }, set: { source.wrappedValue = $0 })
     }
 }
 

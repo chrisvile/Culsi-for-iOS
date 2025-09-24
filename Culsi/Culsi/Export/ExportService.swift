@@ -2,28 +2,24 @@ import Foundation
 import UniformTypeIdentifiers
 import CoreTransferable
 
-enum ExportError: Error {
-    case encoding
-}
+enum ExportError: Error { case encoding }
 
 struct ExportService {
     func data(for logs: [FoodLog], format: ExportFormat) throws -> Data {
         switch format {
         case .csv:
-            guard let data = csv(from: logs).data(using: .utf8) else { throw ExportError.encoding }
-            return data
+            guard let out = csv(from: logs).data(using: .utf8) else { throw ExportError.encoding }
+            return out
         case .json:
-            let encoder = JSONEncoder()
-            encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
-            encoder.dateEncodingStrategy = .iso8601
-            return try encoder.encode(logs)
+            let enc = JSONEncoder()
+            enc.outputFormatting = [.prettyPrinted, .sortedKeys]
+            enc.dateEncodingStrategy = .iso8601
+            return try enc.encode(logs)
         }
     }
 
-    @available(iOS 16.0, *)
     func payload(for logs: [FoodLog], format: ExportFormat, filename: String = "food-log") throws -> ExportPayload {
-        let data = try data(for: logs, format: format)
-        return ExportPayload(data: data, filename: filename, format: format)
+        ExportPayload(data: try data(for: logs, format: format), filename: filename, format: format)
     }
 
     func csv(from logs: [FoodLog]) -> String {
@@ -42,12 +38,9 @@ struct ExportService {
         return rows.joined(separator: "\n")
     }
 
-    private func escape(_ value: String) -> String {
-        if value.contains(",") || value.contains("\"") {
-            let escaped = value.replacingOccurrences(of: "\"", with: "\"\"")
-            return "\"\(escaped)\""
-        }
-        return value
+    private func escape(_ s: String) -> String {
+        if s.contains(",") || s.contains("\"") { return "\"\(s.replacingOccurrences(of: "\"", with: "\"\""))\"" }
+        return s
     }
 }
 
@@ -58,8 +51,6 @@ struct ExportPayload: Transferable {
     let format: ExportFormat
 
     static var transferRepresentation: some TransferRepresentation {
-        // Use the designated initializer that takes a fixed UTType.
-        // We pass `.data` and rely on the filename extension for the correct type.
         DataRepresentation(exportedContentType: .data) { payload in
             payload.data
         }

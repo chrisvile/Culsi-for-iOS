@@ -1,45 +1,38 @@
 import Foundation
 #if canImport(SwiftData)
 import SwiftData
-
-enum AverySheetStoreError: Error {
-    case notFound
-}
-
-actor AverySheetStateStore {
-    private let context: ModelContext
-
-    init(database: Database = CulsiDatabase.shared) {
-        context = database.newContext()
-    }
-
-    func loadCurrent(templateIdentifier: String) throws -> AverySheetState {
-        if let existing = try context.fetch(FetchDescriptor<AverySheetState>()).first {
-            return existing
-        }
-        let state = AverySheetState(templateIdentifier: templateIdentifier)
-        context.insert(state)
-        try context.save()
-        return state
-    }
-
-    func save(_ state: AverySheetState) throws {
-        state.updatedAt = .now
-        try context.save()
-    }
-
-    func reset(templateIdentifier: String) throws -> AverySheetState {
-        let descriptor = FetchDescriptor<AverySheetState>()
-        let states = try context.fetch(descriptor)
-        for state in states {
-            context.delete(state)
-        }
-        let newState = AverySheetState(templateIdentifier: templateIdentifier)
-        context.insert(newState)
-        try context.save()
-        return newState
-    }
-}
-#else
-// Core Data fallback can be implemented if SwiftData is unavailable.
 #endif
+
+@MainActor
+final class AverySheetStateStore {
+    #if canImport(SwiftData)
+    private let container: ModelContainer
+    init(container: ModelContainer) { self.container = container }
+    #else
+    init() {}
+    #endif
+
+    nonisolated(unsafe) static let shared: AverySheetStateStore = {
+        #if canImport(SwiftData)
+        return AverySheetStateStore(container: try! CulsiDatabase.shared.container)
+        #else
+        return AverySheetStateStore()
+        #endif
+    }()
+
+    #if canImport(SwiftData)
+    func fetch() throws -> [AverySheetState] {
+        try ModelContext(container).fetch(FetchDescriptor<AverySheetState>())
+    }
+    func upsert(_ state: AverySheetState) throws {
+        let ctx = ModelContext(container); ctx.insert(state); try ctx.save()
+    }
+    func delete(_ state: AverySheetState) throws {
+        let ctx = ModelContext(container); ctx.delete(state); try ctx.save()
+    }
+    #else
+    func fetch() throws -> [AverySheetState] { [] }
+    func upsert(_ state: AverySheetState) throws {}
+    func delete(_ state: AverySheetState) throws {}
+    #endif
+}

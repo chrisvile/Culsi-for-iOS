@@ -7,6 +7,7 @@ protocol Database {
     func newContext() -> ModelContext
 }
 
+@available(iOS 17.0, *)
 final class CulsiDatabase: Database {
     static let shared = CulsiDatabase()
 
@@ -50,7 +51,7 @@ final class CulsiDatabase: Database {
             ]
             logs.forEach { context.insert($0) }
 
-            let sheet = AverySheetState(templateIdentifier: LabelTemplates.avery5160.id)
+            let sheet = AverySheetState()
             context.insert(sheet)
             try? context.save()
         }
