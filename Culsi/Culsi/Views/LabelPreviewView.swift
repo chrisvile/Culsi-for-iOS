@@ -39,8 +39,12 @@ struct LabelPreviewView: View {
                     }
                     Button("Print") {
                         #if canImport(UIKit)
+                        let renderer = LabelPrinter.from(
+                            placements: batchViewModel.placements,
+                            sheet: batchViewModel.sheetState
+                        )
                         let controller = UIPrintInteractionController.shared
-                        controller.printPageRenderer = LabelPrinter()
+                        controller.printPageRenderer = renderer
                         controller.present(animated: true, completionHandler: nil)
                         #endif
                     }

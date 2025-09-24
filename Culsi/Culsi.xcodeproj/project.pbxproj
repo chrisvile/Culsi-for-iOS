@@ -13,15 +13,81 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		83A44D2E2E83468900126B17 /* Culsi */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Culsi;
-			sourceTree = "<group>";
-		};
-
-                83B1A0182E8349AB00126B17 /* CulsiTests */ = {
+                CD18FC9FB6494384932AF3BD /* App */ = {
                         isa = PBXFileSystemSynchronizedRootGroup;
-                        path = Culsi/Culsi/Tests;
+                        path = App;
+                        sourceTree = "<group>";
+                };
+
+                A6FE8102C0FA7A26774E22AF /* Assets.xcassets */ = {
+                        isa = PBXFileSystemSynchronizedRootGroup;
+                        path = Assets.xcassets;
+                        sourceTree = "<group>";
+                };
+
+                3993A69E2CA7956518F22441 /* Culsi.xcdatamodeld */ = {
+                        isa = PBXFileSystemSynchronizedRootGroup;
+                        path = Culsi.xcdatamodeld;
+                        sourceTree = "<group>";
+                };
+
+                2C876D8EFB2A3FA670837B5A /* Export */ = {
+                        isa = PBXFileSystemSynchronizedRootGroup;
+                        path = Export;
+                        sourceTree = "<group>";
+                };
+
+                D1347120363C2B310653F610 /* Models */ = {
+                        isa = PBXFileSystemSynchronizedRootGroup;
+                        path = Models;
+                        sourceTree = "<group>";
+                };
+
+                D382729BD51E13C68BF56155 /* Persistence */ = {
+                        isa = PBXFileSystemSynchronizedRootGroup;
+                        path = Persistence;
+                        sourceTree = "<group>";
+                };
+
+                A83E50FD9BC840E2A1847FB9 /* Printing */ = {
+                        isa = PBXFileSystemSynchronizedRootGroup;
+                        path = Printing;
+                        sourceTree = "<group>";
+                };
+
+                B49CD206A577ECD1CD15E285 /* Repositories */ = {
+                        isa = PBXFileSystemSynchronizedRootGroup;
+                        path = Repositories;
+                        sourceTree = "<group>";
+                };
+
+                EF01FA9E1D6240CDA0600363 /* Resources */ = {
+                        isa = PBXFileSystemSynchronizedRootGroup;
+                        path = Resources;
+                        sourceTree = "<group>";
+                };
+
+                69853FC208E384B34801168A /* Utilities */ = {
+                        isa = PBXFileSystemSynchronizedRootGroup;
+                        path = Utilities;
+                        sourceTree = "<group>";
+                };
+
+                B1FEDB56C90448AAB2A11854 /* ViewModels */ = {
+                        isa = PBXFileSystemSynchronizedRootGroup;
+                        path = ViewModels;
+                        sourceTree = "<group>";
+                };
+
+                9BC493F719529CA9D33FFAA3 /* Views */ = {
+                        isa = PBXFileSystemSynchronizedRootGroup;
+                        path = Views;
+                        sourceTree = "<group>";
+                };
+
+                83B1A0182E8349AB00126B17 /* Tests */ = {
+                        isa = PBXFileSystemSynchronizedRootGroup;
+                        path = Tests;
                         sourceTree = "<group>";
                 };
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -55,18 +121,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		83A44D232E83468900126B17 = {
-			isa = PBXGroup;
-			children = (
-				83A44D2E2E83468900126B17 /* Culsi */,
-				83A44D2D2E83468900126B17 /* Products */,
-			);
-			sourceTree = "<group>";
-		};
-		83A44D2D2E83468900126B17 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				83A44D2C2E83468900126B17 /* Culsi.app */,
+                83A44D232E83468900126B17 = {
+                        isa = PBXGroup;
+                        children = (
+                                83A44D2E2E83468900126B17 /* Culsi */,
+                                83A44D2D2E83468900126B17 /* Products */,
+                        );
+                        sourceTree = "<group>";
+                };
+                83A44D2E2E83468900126B17 /* Culsi */ = {
+                        isa = PBXGroup;
+                        children = (
+                                CD18FC9FB6494384932AF3BD /* App */,
+                                A6FE8102C0FA7A26774E22AF /* Assets.xcassets */,
+                                3993A69E2CA7956518F22441 /* Culsi.xcdatamodeld */,
+                                2C876D8EFB2A3FA670837B5A /* Export */,
+                                D1347120363C2B310653F610 /* Models */,
+                                D382729BD51E13C68BF56155 /* Persistence */,
+                                A83E50FD9BC840E2A1847FB9 /* Printing */,
+                                B49CD206A577ECD1CD15E285 /* Repositories */,
+                                EF01FA9E1D6240CDA0600363 /* Resources */,
+                                69853FC208E384B34801168A /* Utilities */,
+                                B1FEDB56C90448AAB2A11854 /* ViewModels */,
+                                9BC493F719529CA9D33FFAA3 /* Views */,
+                                83B1A0182E8349AB00126B17 /* Tests */,
+                        );
+                        path = Culsi;
+                        sourceTree = "<group>";
+                };
+                83A44D2D2E83468900126B17 /* Products */ = {
+                        isa = PBXGroup;
+                        children = (
+                                83A44D2C2E83468900126B17 /* Culsi.app */,
                                 83B1A0172E8349AB00126B17 /* CulsiTests.xctest */,
 			);
 			name = Products;
@@ -87,9 +173,20 @@
 			);
 			dependencies = (
 			);
-			fileSystemSynchronizedGroups = (
-				83A44D2E2E83468900126B17 /* Culsi */,
-			);
+                        fileSystemSynchronizedGroups = (
+                                CD18FC9FB6494384932AF3BD /* App */,
+                                A6FE8102C0FA7A26774E22AF /* Assets.xcassets */,
+                                3993A69E2CA7956518F22441 /* Culsi.xcdatamodeld */,
+                                2C876D8EFB2A3FA670837B5A /* Export */,
+                                D1347120363C2B310653F610 /* Models */,
+                                D382729BD51E13C68BF56155 /* Persistence */,
+                                A83E50FD9BC840E2A1847FB9 /* Printing */,
+                                B49CD206A577ECD1CD15E285 /* Repositories */,
+                                EF01FA9E1D6240CDA0600363 /* Resources */,
+                                69853FC208E384B34801168A /* Utilities */,
+                                B1FEDB56C90448AAB2A11854 /* ViewModels */,
+                                9BC493F719529CA9D33FFAA3 /* Views */,
+                        );
 			name = Culsi;
 			packageProductDependencies = (
 			);
@@ -112,7 +209,7 @@
                                 83B1A01A2E8349AB00126B17 /* PBXTargetDependency */,
                         );
                         fileSystemSynchronizedGroups = (
-                                83B1A0182E8349AB00126B17 /* CulsiTests */,
+                                83B1A0182E8349AB00126B17 /* Tests */,
                         );
                         name = CulsiTests;
                         packageProductDependencies = (
