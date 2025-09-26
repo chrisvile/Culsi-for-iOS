@@ -24,40 +24,114 @@ struct FoodLogListView: View {
     }
 
     @StateObject private var viewModel = FoodLogViewModel()
-    @State private var presentingCreate = false
-    @State private var editingLog: FoodLog?
+    @State private var showAddCard = false
+    @State private var editing: FoodLog?
     private let exportService = ExportService()
     private let exportFormats: [ExportFormat] = [.csv, .json]
 
     var body: some View {
         NavigationStack {
-            List {
-                Section {
+            ScrollView {
+                VStack(spacing: 16) {
                     Picker("Policy Filter", selection: policyFilterBinding) {
                         ForEach(PolicyFilter.allCases) { filter in
                             Text(filter.title).tag(filter)
                         }
                     }
                     .pickerStyle(.segmented)
-                }
+                    .padding(.horizontal)
 
-                Section {
-                    ForEach(viewModel.displayedLogs) { log in
-                        Button {
-                            editingLog = log
-                        } label: {
-                            FoodLogRow(log: log)
+                    if showAddCard {
+                        FoodLogEditorCard(mode: .add) { input in
+                            let payload = FoodLogInput(
+                                name: input.name,
+                                date: input.startedAt,
+                                quantity: 1,
+                                unit: input.tempUnit == .ea ? "ea" : (input.tempUnit == .f ? "°F" : "°C"),
+                                policy: input.policy,
+                                startedAt: input.startedAt,
+                                measuredTemp: input.measuredTemp,
+                                tempUnit: input.tempUnit,
+                                location: input.location,
+                                employee: input.employee,
+                                notes: input.notes
+                            )
+                            viewModel.add(payload)
+                            withAnimation(.snappy) {
+                                showAddCard = false
+                            }
+                        } onCancel: {
+                            withAnimation(.snappy) {
+                                showAddCard = false
+                            }
                         }
-                        .buttonStyle(.plain)
+                        .transition(.move(edge: .top).combined(with: .opacity))
+                        .padding(.horizontal)
                     }
-                    .onDelete(perform: delete)
+
+                    LazyVStack(spacing: 12) {
+                        ForEach(viewModel.displayedLogs) { log in
+                            VStack(spacing: 8) {
+                                Button {
+                                    withAnimation(.snappy) {
+                                        editing = log
+                                        showAddCard = false
+                                    }
+                                } label: {
+                                    FoodLogRow(log: log)
+                                        .padding(12)
+                                        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                                        .overlay {
+                                            RoundedRectangle(cornerRadius: 14)
+                                                .strokeBorder(Color.primary.opacity(0.08))
+                                        }
+                                }
+                                .buttonStyle(.plain)
+
+                                if editing?.id == log.id {
+                                    FoodLogEditorCard(mode: .edit(log)) { input in
+                                        var updated = log
+                                        updated.name = input.name
+                                        updated.policy = input.policy
+                                        updated.resolvedStartedAt = input.startedAt
+                                        updated.date = input.startedAt
+                                        updated.measuredTemp = input.measuredTemp
+                                        updated.tempUnit = input.tempUnit
+                                        updated.location = input.location
+                                        updated.employee = input.employee
+                                        updated.notes = input.notes
+                                        viewModel.update(updated)
+                                        withAnimation(.snappy) {
+                                            editing = nil
+                                        }
+                                    } onCancel: {
+                                        withAnimation(.snappy) {
+                                            editing = nil
+                                        }
+                                    } onDelete: {
+                                        viewModel.delete(id: log.id)
+                                        withAnimation(.snappy) {
+                                            editing = nil
+                                        }
+                                    }
+                                    .transition(.move(edge: .top).combined(with: .opacity))
+                                }
+                            }
+                        }
+                    }
+                    .padding(.horizontal)
+                    .padding(.bottom, 12)
                 }
+                .padding(.top, 16)
             }
-            .listStyle(.insetGrouped)
             .navigationTitle("Food Log")
             .searchable(text: $viewModel.searchText)
             .onAppear { viewModel.onAppear() }
             .onDisappear { viewModel.onDisappear() }
+            .onChange(of: viewModel.logs) { logs in
+                guard let editingID = editing?.id else { return }
+                editing = logs.first { $0.id == editingID }
+            }
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) {
                     Menu {
@@ -71,6 +145,14 @@ struct FoodLogListView: View {
                     }
                 }
                 ToolbarItemGroup(placement: .topBarTrailing) {
+                    Button {
+                        withAnimation(.snappy) {
+                            showAddCard.toggle()
+                            editing = nil
+                        }
+                    } label: {
+                        Label(showAddCard ? "Close" : "Add", systemImage: showAddCard ? "xmark.circle.fill" : "plus.circle.fill")
+                    }
                     Menu {
                         ForEach(exportFormats, id: \.self) { format in
                             if #available(iOS 16.0, *),
@@ -88,32 +170,8 @@ struct FoodLogListView: View {
                     } label: {
                         Label("Export", systemImage: "square.and.arrow.up")
                     }
-                    Button {
-                        presentingCreate = true
-                    } label: {
-                        Image(systemName: "plus")
-                    }
                 }
             }
-            .sheet(isPresented: $presentingCreate) {
-                FoodLogDetailView(mode: .create) { input in
-                    viewModel.add(input)
-                }
-            }
-            .sheet(item: $editingLog, onDismiss: { editingLog = nil }) { log in
-                FoodLogDetailView(mode: .edit(log)) { input in
-                    if let id = input.id { viewModel.update(id: id, with: input) }
-                } onDelete: {
-                    viewModel.delete(id: log.id)
-                }
-            }
-        }
-    }
-
-    private func delete(at offsets: IndexSet) {
-        for index in offsets {
-            let log = viewModel.displayedLogs[index]
-            viewModel.delete(id: log.id)
         }
     }
 
