@@ -1,4 +1,3 @@
-import Combine
 import SwiftUI
 import SwiftData
 
@@ -13,13 +12,6 @@ struct FoodLogDetailView: View {
     var onDelete: (() -> Void)?
     @Environment(\.dismiss) private var dismiss
     @State private var input: FoodLogInput
-
-    private static let countdownFormatter: DateComponentsFormatter = {
-        let f = DateComponentsFormatter()
-        f.unitsStyle = .abbreviated
-        f.allowedUnits = [.hour, .minute, .second]
-        return f
-    }()
 
     init(mode: Mode, onSave: @escaping (FoodLogInput) -> Void, onDelete: (() -> Void)? = nil) {
         self.mode = mode
@@ -154,32 +146,6 @@ struct FoodLogDetailView: View {
         return formatter.string(from: discardDate)
     }
 
-    struct TPHCCountdownView: View {
-        let startedAt: Date
-
-        @State private var now = Date()
-        private let timer = Timer.publish(every: 30, on: .main, in: .common).autoconnect()
-
-        var body: some View {
-            let discardAt = startedAt.addingTimeInterval(4 * 60 * 60)
-            let remaining = max(0, discardAt.timeIntervalSince(now))
-
-            let message: String
-            if remaining > 0 {
-                let value = FoodLogDetailView.countdownFormatter.string(from: remaining) ?? "--"
-                message = "Discard in \(value)"
-            } else {
-                message = "Expired"
-            }
-
-            return Text(message)
-                .font(.caption)
-                .foregroundStyle(remaining > 0 ? Color.blue : .red)
-                .onReceive(timer) { value in
-                    now = value
-                }
-        }
-    }
 }
 
 private extension FoodLogDetailView.Mode {

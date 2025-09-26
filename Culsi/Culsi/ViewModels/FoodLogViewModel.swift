@@ -108,6 +108,12 @@ final class FoodLogViewModel: ObservableObject {
         }
     }
 
+    func update(_ log: FoodLog) {
+        Task {
+            try? await repository.update(log)
+        }
+    }
+
     func delete(id: UUID) {
         Task {
             try? await repository.delete(id: id)
